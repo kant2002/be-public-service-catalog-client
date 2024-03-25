@@ -4,8 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "build": "rimraf dist/ && mkdir dist && npm run genproto && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "genproto": "genproto --outputDir src/generated --generateClient"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@kant2002-diia-inhouse/configs": "^1.27.1",
-    "@kant2002-diia-inhouse/types": "^5.1.0"
+    "@kant2002-diia-inhouse/types": "^5.1.0",
+    "@kant2002-diia-inhouse/genproto": "^1.10.0"
   }
 }

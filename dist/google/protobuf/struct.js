@@ -140,18 +140,18 @@ exports.Struct = {
     wrap(object) {
         const struct = createBaseStruct();
         if (object !== undefined) {
-            Object.keys(object).forEach((key) => {
+            for (const key of Object.keys(object)) {
                 struct.fields[key] = object[key];
-            });
+            }
         }
         return struct;
     },
     unwrap(message) {
         const object = {};
         if (message.fields) {
-            Object.keys(message.fields).forEach((key) => {
+            for (const key of Object.keys(message.fields)) {
                 object[key] = message.fields[key];
-            });
+            }
         }
         return object;
     },

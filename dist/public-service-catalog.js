@@ -24,10 +24,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PublicServiceCatalogDefinition = exports.PublicServiceCategoryResultLocalesEntry = exports.PublicServiceCategoryResult = exports.PublicServiceCategoryLocalesEntry = exports.PublicServiceCategory = exports.PublicServiceLocalesEntry = exports.PublicService = exports.PublicServiceResponse = exports.PublicServiceCategoryResponse = exports.PublicServiceTab = exports.UpdatePublicServiceCategoryRequestLocalesEntry = exports.UpdatePublicServiceCategoryRequest = exports.UpdatePublicServiceRequestLocalesEntry = exports.UpdatePublicServiceRequest = exports.IsPublicServiceAvailableResponse = exports.UserFeatures = exports.IsPublicServiceAvailableRequest = exports.GetPublicServicesListResponse = exports.GetPublicServicesListRequest = exports.GetPublicServicesResponse = exports.PublicServiceSettingsRequest = exports.GetPublicServiceContextMenuResponse = exports.GetPublicServiceContextMenuRequest = exports.GetPublicServiceByCodeRequest = exports.GetPublicServiceCategoriesListResponse = exports.GetPublicServiceCategoriesListRequest = exports.GetPublicServiceCategoryByCategoryRequest = exports.publicServiceCategoryStatusToNumber = exports.publicServiceCategoryStatusToJSON = exports.publicServiceCategoryStatusFromJSON = exports.PublicServiceCategoryStatus = void 0;
-/* eslint-disable */
-const types_1 = require("@kant2002-diia-inhouse/types");
 const _m0 = __importStar(require("protobufjs/minimal"));
+const publicServiceCodes_1 = require("./category/publicServiceCodes");
+const contextMenu_1 = require("./contextMenu");
 const empty_1 = require("./google/protobuf/empty");
+const profileFeature_1 = require("./profileFeature");
+const publicServiceCode_1 = require("./publicServiceCode");
+const sessionType_1 = require("./session/sessionType");
+const version_1 = require("./version");
 var PublicServiceCategoryStatus;
 (function (PublicServiceCategoryStatus) {
     PublicServiceCategoryStatus["active"] = "active";
@@ -69,12 +73,12 @@ function publicServiceCategoryStatusToNumber(object) {
 }
 exports.publicServiceCategoryStatusToNumber = publicServiceCategoryStatusToNumber;
 function createBaseGetPublicServiceCategoryByCategoryRequest() {
-    return { category: types_1.PublicServiceCategoryCode.carServices };
+    return { category: publicServiceCodes_1.PublicServiceCategoryCode.carServices };
 }
 exports.GetPublicServiceCategoryByCategoryRequest = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.category !== types_1.PublicServiceCategoryCode.carServices) {
-            writer.uint32(8).int32((0, types_1.publicServiceCategoryCodeToNumber)(message.category));
+        if (message.category !== publicServiceCodes_1.PublicServiceCategoryCode.carServices) {
+            writer.uint32(8).int32((0, publicServiceCodes_1.publicServiceCategoryCodeToNumber)(message.category));
         }
         return writer;
     },
@@ -89,7 +93,7 @@ exports.GetPublicServiceCategoryByCategoryRequest = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.category = (0, types_1.publicServiceCategoryCodeFromJSON)(reader.int32());
+                    message.category = (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(reader.int32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -102,14 +106,14 @@ exports.GetPublicServiceCategoryByCategoryRequest = {
     fromJSON(object) {
         return {
             category: isSet(object.category)
-                ? (0, types_1.publicServiceCategoryCodeFromJSON)(object.category)
-                : types_1.PublicServiceCategoryCode.carServices,
+                ? (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(object.category)
+                : publicServiceCodes_1.PublicServiceCategoryCode.carServices,
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.category !== types_1.PublicServiceCategoryCode.carServices) {
-            obj.category = (0, types_1.publicServiceCategoryCodeToJSON)(message.category);
+        if (message.category !== publicServiceCodes_1.PublicServiceCategoryCode.carServices) {
+            obj.category = (0, publicServiceCodes_1.publicServiceCategoryCodeToJSON)(message.category);
         }
         return obj;
     },
@@ -118,7 +122,7 @@ exports.GetPublicServiceCategoryByCategoryRequest = {
     },
     fromPartial(object) {
         const message = createBaseGetPublicServiceCategoryByCategoryRequest();
-        message.category = object.category ?? types_1.PublicServiceCategoryCode.carServices;
+        message.category = object.category ?? publicServiceCodes_1.PublicServiceCategoryCode.carServices;
         return message;
     },
 };
@@ -258,12 +262,12 @@ exports.GetPublicServiceCategoriesListResponse = {
     },
 };
 function createBaseGetPublicServiceByCodeRequest() {
-    return { code: types_1.PublicServiceCode.administrativeFees };
+    return { code: publicServiceCode_1.PublicServiceCode.administrativeFees };
 }
 exports.GetPublicServiceByCodeRequest = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            writer.uint32(8).int32((0, types_1.publicServiceCodeToNumber)(message.code));
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            writer.uint32(8).int32((0, publicServiceCode_1.publicServiceCodeToNumber)(message.code));
         }
         return writer;
     },
@@ -278,7 +282,7 @@ exports.GetPublicServiceByCodeRequest = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.code = (0, types_1.publicServiceCodeFromJSON)(reader.int32());
+                    message.code = (0, publicServiceCode_1.publicServiceCodeFromJSON)(reader.int32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -289,12 +293,12 @@ exports.GetPublicServiceByCodeRequest = {
         return message;
     },
     fromJSON(object) {
-        return { code: isSet(object.code) ? (0, types_1.publicServiceCodeFromJSON)(object.code) : types_1.PublicServiceCode.administrativeFees };
+        return { code: isSet(object.code) ? (0, publicServiceCode_1.publicServiceCodeFromJSON)(object.code) : publicServiceCode_1.PublicServiceCode.administrativeFees };
     },
     toJSON(message) {
         const obj = {};
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            obj.code = (0, types_1.publicServiceCodeToJSON)(message.code);
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            obj.code = (0, publicServiceCode_1.publicServiceCodeToJSON)(message.code);
         }
         return obj;
     },
@@ -303,17 +307,17 @@ exports.GetPublicServiceByCodeRequest = {
     },
     fromPartial(object) {
         const message = createBaseGetPublicServiceByCodeRequest();
-        message.code = object.code ?? types_1.PublicServiceCode.administrativeFees;
+        message.code = object.code ?? publicServiceCode_1.PublicServiceCode.administrativeFees;
         return message;
     },
 };
 function createBaseGetPublicServiceContextMenuRequest() {
-    return { code: types_1.PublicServiceCode.administrativeFees };
+    return { code: publicServiceCode_1.PublicServiceCode.administrativeFees };
 }
 exports.GetPublicServiceContextMenuRequest = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            writer.uint32(8).int32((0, types_1.publicServiceCodeToNumber)(message.code));
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            writer.uint32(8).int32((0, publicServiceCode_1.publicServiceCodeToNumber)(message.code));
         }
         return writer;
     },
@@ -328,7 +332,7 @@ exports.GetPublicServiceContextMenuRequest = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.code = (0, types_1.publicServiceCodeFromJSON)(reader.int32());
+                    message.code = (0, publicServiceCode_1.publicServiceCodeFromJSON)(reader.int32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -339,12 +343,12 @@ exports.GetPublicServiceContextMenuRequest = {
         return message;
     },
     fromJSON(object) {
-        return { code: isSet(object.code) ? (0, types_1.publicServiceCodeFromJSON)(object.code) : types_1.PublicServiceCode.administrativeFees };
+        return { code: isSet(object.code) ? (0, publicServiceCode_1.publicServiceCodeFromJSON)(object.code) : publicServiceCode_1.PublicServiceCode.administrativeFees };
     },
     toJSON(message) {
         const obj = {};
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            obj.code = (0, types_1.publicServiceCodeToJSON)(message.code);
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            obj.code = (0, publicServiceCode_1.publicServiceCodeToJSON)(message.code);
         }
         return obj;
     },
@@ -353,7 +357,7 @@ exports.GetPublicServiceContextMenuRequest = {
     },
     fromPartial(object) {
         const message = createBaseGetPublicServiceContextMenuRequest();
-        message.code = object.code ?? types_1.PublicServiceCode.administrativeFees;
+        message.code = object.code ?? publicServiceCode_1.PublicServiceCode.administrativeFees;
         return message;
     },
 };
@@ -363,7 +367,7 @@ function createBaseGetPublicServiceContextMenuResponse() {
 exports.GetPublicServiceContextMenuResponse = {
     encode(message, writer = _m0.Writer.create()) {
         for (const v of message.contextMenu) {
-            types_1.PublicServiceContextMenu.encode(v, writer.uint32(10).fork()).ldelim();
+            contextMenu_1.PublicServiceContextMenu.encode(v, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
@@ -378,7 +382,7 @@ exports.GetPublicServiceContextMenuResponse = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.contextMenu.push(types_1.PublicServiceContextMenu.decode(reader, reader.uint32()));
+                    message.contextMenu.push(contextMenu_1.PublicServiceContextMenu.decode(reader, reader.uint32()));
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -391,14 +395,14 @@ exports.GetPublicServiceContextMenuResponse = {
     fromJSON(object) {
         return {
             contextMenu: globalThis.Array.isArray(object?.contextMenu)
-                ? object.contextMenu.map((e) => types_1.PublicServiceContextMenu.fromJSON(e))
+                ? object.contextMenu.map((e) => contextMenu_1.PublicServiceContextMenu.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
         if (message.contextMenu?.length) {
-            obj.contextMenu = message.contextMenu.map((e) => types_1.PublicServiceContextMenu.toJSON(e));
+            obj.contextMenu = message.contextMenu.map((e) => contextMenu_1.PublicServiceContextMenu.toJSON(e));
         }
         return obj;
     },
@@ -407,17 +411,17 @@ exports.GetPublicServiceContextMenuResponse = {
     },
     fromPartial(object) {
         const message = createBaseGetPublicServiceContextMenuResponse();
-        message.contextMenu = object.contextMenu?.map((e) => types_1.PublicServiceContextMenu.fromPartial(e)) || [];
+        message.contextMenu = object.contextMenu?.map((e) => contextMenu_1.PublicServiceContextMenu.fromPartial(e)) || [];
         return message;
     },
 };
 function createBasePublicServiceSettingsRequest() {
-    return { code: types_1.PublicServiceCode.administrativeFees };
+    return { code: publicServiceCode_1.PublicServiceCode.administrativeFees };
 }
 exports.PublicServiceSettingsRequest = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            writer.uint32(8).int32((0, types_1.publicServiceCodeToNumber)(message.code));
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            writer.uint32(8).int32((0, publicServiceCode_1.publicServiceCodeToNumber)(message.code));
         }
         return writer;
     },
@@ -432,7 +436,7 @@ exports.PublicServiceSettingsRequest = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.code = (0, types_1.publicServiceCodeFromJSON)(reader.int32());
+                    message.code = (0, publicServiceCode_1.publicServiceCodeFromJSON)(reader.int32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -443,12 +447,12 @@ exports.PublicServiceSettingsRequest = {
         return message;
     },
     fromJSON(object) {
-        return { code: isSet(object.code) ? (0, types_1.publicServiceCodeFromJSON)(object.code) : types_1.PublicServiceCode.administrativeFees };
+        return { code: isSet(object.code) ? (0, publicServiceCode_1.publicServiceCodeFromJSON)(object.code) : publicServiceCode_1.PublicServiceCode.administrativeFees };
     },
     toJSON(message) {
         const obj = {};
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            obj.code = (0, types_1.publicServiceCodeToJSON)(message.code);
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            obj.code = (0, publicServiceCode_1.publicServiceCodeToJSON)(message.code);
         }
         return obj;
     },
@@ -457,7 +461,7 @@ exports.PublicServiceSettingsRequest = {
     },
     fromPartial(object) {
         const message = createBasePublicServiceSettingsRequest();
-        message.code = object.code ?? types_1.PublicServiceCode.administrativeFees;
+        message.code = object.code ?? publicServiceCode_1.PublicServiceCode.administrativeFees;
         return message;
     },
 };
@@ -605,7 +609,7 @@ exports.GetPublicServicesListResponse = {
             writer.uint32(8).int32(message.total);
         }
         for (const v of message.publicServices) {
-            types_1.PublicServiceSettings.encode(v, writer.uint32(18).fork()).ldelim();
+            contextMenu_1.PublicServiceSettings.encode(v, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
@@ -626,7 +630,7 @@ exports.GetPublicServicesListResponse = {
                     if (tag !== 18) {
                         break;
                     }
-                    message.publicServices.push(types_1.PublicServiceSettings.decode(reader, reader.uint32()));
+                    message.publicServices.push(contextMenu_1.PublicServiceSettings.decode(reader, reader.uint32()));
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -640,7 +644,7 @@ exports.GetPublicServicesListResponse = {
         return {
             total: isSet(object.total) ? globalThis.Number(object.total) : 0,
             publicServices: globalThis.Array.isArray(object?.publicServices)
-                ? object.publicServices.map((e) => types_1.PublicServiceSettings.fromJSON(e))
+                ? object.publicServices.map((e) => contextMenu_1.PublicServiceSettings.fromJSON(e))
                 : [],
         };
     },
@@ -650,7 +654,7 @@ exports.GetPublicServicesListResponse = {
             obj.total = Math.round(message.total);
         }
         if (message.publicServices?.length) {
-            obj.publicServices = message.publicServices.map((e) => types_1.PublicServiceSettings.toJSON(e));
+            obj.publicServices = message.publicServices.map((e) => contextMenu_1.PublicServiceSettings.toJSON(e));
         }
         return obj;
     },
@@ -660,20 +664,20 @@ exports.GetPublicServicesListResponse = {
     fromPartial(object) {
         const message = createBaseGetPublicServicesListResponse();
         message.total = object.total ?? 0;
-        message.publicServices = object.publicServices?.map((e) => types_1.PublicServiceSettings.fromPartial(e)) || [];
+        message.publicServices = object.publicServices?.map((e) => contextMenu_1.PublicServiceSettings.fromPartial(e)) || [];
         return message;
     },
 };
 function createBaseIsPublicServiceAvailableRequest() {
-    return { code: types_1.PublicServiceCode.administrativeFees, sessionType: types_1.SessionType.Acquirer, features: undefined };
+    return { code: publicServiceCode_1.PublicServiceCode.administrativeFees, sessionType: sessionType_1.SessionType.Acquirer, features: undefined };
 }
 exports.IsPublicServiceAvailableRequest = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            writer.uint32(8).int32((0, types_1.publicServiceCodeToNumber)(message.code));
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            writer.uint32(8).int32((0, publicServiceCode_1.publicServiceCodeToNumber)(message.code));
         }
-        if (message.sessionType !== types_1.SessionType.Acquirer) {
-            writer.uint32(16).int32((0, types_1.sessionTypeToNumber)(message.sessionType));
+        if (message.sessionType !== sessionType_1.SessionType.Acquirer) {
+            writer.uint32(16).int32((0, sessionType_1.sessionTypeToNumber)(message.sessionType));
         }
         if (message.features !== undefined) {
             exports.UserFeatures.encode(message.features, writer.uint32(26).fork()).ldelim();
@@ -691,13 +695,13 @@ exports.IsPublicServiceAvailableRequest = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.code = (0, types_1.publicServiceCodeFromJSON)(reader.int32());
+                    message.code = (0, publicServiceCode_1.publicServiceCodeFromJSON)(reader.int32());
                     continue;
                 case 2:
                     if (tag !== 16) {
                         break;
                     }
-                    message.sessionType = (0, types_1.sessionTypeFromJSON)(reader.int32());
+                    message.sessionType = (0, sessionType_1.sessionTypeFromJSON)(reader.int32());
                     continue;
                 case 3:
                     if (tag !== 26) {
@@ -715,18 +719,18 @@ exports.IsPublicServiceAvailableRequest = {
     },
     fromJSON(object) {
         return {
-            code: isSet(object.code) ? (0, types_1.publicServiceCodeFromJSON)(object.code) : types_1.PublicServiceCode.administrativeFees,
-            sessionType: isSet(object.sessionType) ? (0, types_1.sessionTypeFromJSON)(object.sessionType) : types_1.SessionType.Acquirer,
+            code: isSet(object.code) ? (0, publicServiceCode_1.publicServiceCodeFromJSON)(object.code) : publicServiceCode_1.PublicServiceCode.administrativeFees,
+            sessionType: isSet(object.sessionType) ? (0, sessionType_1.sessionTypeFromJSON)(object.sessionType) : sessionType_1.SessionType.Acquirer,
             features: isSet(object.features) ? exports.UserFeatures.fromJSON(object.features) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            obj.code = (0, types_1.publicServiceCodeToJSON)(message.code);
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            obj.code = (0, publicServiceCode_1.publicServiceCodeToJSON)(message.code);
         }
-        if (message.sessionType !== types_1.SessionType.Acquirer) {
-            obj.sessionType = (0, types_1.sessionTypeToJSON)(message.sessionType);
+        if (message.sessionType !== sessionType_1.SessionType.Acquirer) {
+            obj.sessionType = (0, sessionType_1.sessionTypeToJSON)(message.sessionType);
         }
         if (message.features !== undefined) {
             obj.features = exports.UserFeatures.toJSON(message.features);
@@ -738,8 +742,8 @@ exports.IsPublicServiceAvailableRequest = {
     },
     fromPartial(object) {
         const message = createBaseIsPublicServiceAvailableRequest();
-        message.code = object.code ?? types_1.PublicServiceCode.administrativeFees;
-        message.sessionType = object.sessionType ?? types_1.SessionType.Acquirer;
+        message.code = object.code ?? publicServiceCode_1.PublicServiceCode.administrativeFees;
+        message.sessionType = object.sessionType ?? sessionType_1.SessionType.Acquirer;
         message.features = (object.features !== undefined && object.features !== null)
             ? exports.UserFeatures.fromPartial(object.features)
             : undefined;
@@ -752,7 +756,7 @@ function createBaseUserFeatures() {
 exports.UserFeatures = {
     encode(message, writer = _m0.Writer.create()) {
         if (message.office !== undefined) {
-            types_1.DiiaOfficeProfileData.encode(message.office, writer.uint32(10).fork()).ldelim();
+            profileFeature_1.DiiaOfficeProfileData.encode(message.office, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
@@ -767,7 +771,7 @@ exports.UserFeatures = {
                     if (tag !== 10) {
                         break;
                     }
-                    message.office = types_1.DiiaOfficeProfileData.decode(reader, reader.uint32());
+                    message.office = profileFeature_1.DiiaOfficeProfileData.decode(reader, reader.uint32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -778,12 +782,12 @@ exports.UserFeatures = {
         return message;
     },
     fromJSON(object) {
-        return { office: isSet(object.office) ? types_1.DiiaOfficeProfileData.fromJSON(object.office) : undefined };
+        return { office: isSet(object.office) ? profileFeature_1.DiiaOfficeProfileData.fromJSON(object.office) : undefined };
     },
     toJSON(message) {
         const obj = {};
         if (message.office !== undefined) {
-            obj.office = types_1.DiiaOfficeProfileData.toJSON(message.office);
+            obj.office = profileFeature_1.DiiaOfficeProfileData.toJSON(message.office);
         }
         return obj;
     },
@@ -793,7 +797,7 @@ exports.UserFeatures = {
     fromPartial(object) {
         const message = createBaseUserFeatures();
         message.office = (object.office !== undefined && object.office !== null)
-            ? types_1.DiiaOfficeProfileData.fromPartial(object.office)
+            ? profileFeature_1.DiiaOfficeProfileData.fromPartial(object.office)
             : undefined;
         return message;
     },
@@ -803,7 +807,7 @@ function createBaseIsPublicServiceAvailableResponse() {
 }
 exports.IsPublicServiceAvailableResponse = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.isAvailable === true) {
+        if (message.isAvailable !== false) {
             writer.uint32(8).bool(message.isAvailable);
         }
         return writer;
@@ -834,7 +838,7 @@ exports.IsPublicServiceAvailableResponse = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.isAvailable === true) {
+        if (message.isAvailable !== false) {
             obj.isAvailable = message.isAvailable;
         }
         return obj;
@@ -876,31 +880,31 @@ exports.UpdatePublicServiceRequest = {
             writer.uint32(24).int32(message.sortOrder);
         }
         if (message.status !== undefined) {
-            writer.uint32(32).int32((0, types_1.publicServiceStatusToNumber)(message.status));
+            writer.uint32(32).int32((0, publicServiceCode_1.publicServiceStatusToNumber)(message.status));
         }
         if (message.appVersions !== undefined) {
-            types_1.PublicServiceAppVersionsBySession.encode(message.appVersions, writer.uint32(42).fork()).ldelim();
+            version_1.PublicServiceAppVersionsBySession.encode(message.appVersions, writer.uint32(42).fork()).ldelim();
         }
         if (message.platformMinVersion !== undefined) {
-            types_1.SingleVersionRecord.encode(message.platformMinVersion, writer.uint32(50).fork()).ldelim();
+            version_1.SingleVersionRecord.encode(message.platformMinVersion, writer.uint32(50).fork()).ldelim();
         }
         if (message.profileFeature !== undefined) {
-            writer.uint32(56).int32((0, types_1.profileFeatureToNumber)(message.profileFeature));
+            writer.uint32(56).int32((0, profileFeature_1.profileFeatureToNumber)(message.profileFeature));
         }
         for (const v of message.segments) {
             writer.uint32(66).string(v);
         }
         writer.uint32(74).fork();
         for (const v of message.categories) {
-            writer.int32((0, types_1.publicServiceCategoryCodeToNumber)(v));
+            writer.int32((0, publicServiceCodes_1.publicServiceCategoryCodeToNumber)(v));
         }
         writer.ldelim();
         for (const v of message.contextMenu) {
-            types_1.PublicServiceContextMenu.encode(v, writer.uint32(82).fork()).ldelim();
+            contextMenu_1.PublicServiceContextMenu.encode(v, writer.uint32(82).fork()).ldelim();
         }
         writer.uint32(90).fork();
         for (const v of message.sessionTypes) {
-            writer.int32((0, types_1.sessionTypeToNumber)(v));
+            writer.int32((0, sessionType_1.sessionTypeToNumber)(v));
         }
         writer.ldelim();
         Object.entries(message.locales).forEach(([key, value]) => {
@@ -937,25 +941,25 @@ exports.UpdatePublicServiceRequest = {
                     if (tag !== 32) {
                         break;
                     }
-                    message.status = (0, types_1.publicServiceStatusFromJSON)(reader.int32());
+                    message.status = (0, publicServiceCode_1.publicServiceStatusFromJSON)(reader.int32());
                     continue;
                 case 5:
                     if (tag !== 42) {
                         break;
                     }
-                    message.appVersions = types_1.PublicServiceAppVersionsBySession.decode(reader, reader.uint32());
+                    message.appVersions = version_1.PublicServiceAppVersionsBySession.decode(reader, reader.uint32());
                     continue;
                 case 6:
                     if (tag !== 50) {
                         break;
                     }
-                    message.platformMinVersion = types_1.SingleVersionRecord.decode(reader, reader.uint32());
+                    message.platformMinVersion = version_1.SingleVersionRecord.decode(reader, reader.uint32());
                     continue;
                 case 7:
                     if (tag !== 56) {
                         break;
                     }
-                    message.profileFeature = (0, types_1.profileFeatureFromJSON)(reader.int32());
+                    message.profileFeature = (0, profileFeature_1.profileFeatureFromJSON)(reader.int32());
                     continue;
                 case 8:
                     if (tag !== 66) {
@@ -965,13 +969,13 @@ exports.UpdatePublicServiceRequest = {
                     continue;
                 case 9:
                     if (tag === 72) {
-                        message.categories.push((0, types_1.publicServiceCategoryCodeFromJSON)(reader.int32()));
+                        message.categories.push((0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(reader.int32()));
                         continue;
                     }
                     if (tag === 74) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
-                            message.categories.push((0, types_1.publicServiceCategoryCodeFromJSON)(reader.int32()));
+                            message.categories.push((0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(reader.int32()));
                         }
                         continue;
                     }
@@ -980,17 +984,17 @@ exports.UpdatePublicServiceRequest = {
                     if (tag !== 82) {
                         break;
                     }
-                    message.contextMenu.push(types_1.PublicServiceContextMenu.decode(reader, reader.uint32()));
+                    message.contextMenu.push(contextMenu_1.PublicServiceContextMenu.decode(reader, reader.uint32()));
                     continue;
                 case 11:
                     if (tag === 88) {
-                        message.sessionTypes.push((0, types_1.sessionTypeFromJSON)(reader.int32()));
+                        message.sessionTypes.push((0, sessionType_1.sessionTypeFromJSON)(reader.int32()));
                         continue;
                     }
                     if (tag === 90) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
-                            message.sessionTypes.push((0, types_1.sessionTypeFromJSON)(reader.int32()));
+                            message.sessionTypes.push((0, sessionType_1.sessionTypeFromJSON)(reader.int32()));
                         }
                         continue;
                     }
@@ -1017,23 +1021,23 @@ exports.UpdatePublicServiceRequest = {
             code: isSet(object.code) ? globalThis.String(object.code) : "",
             name: isSet(object.name) ? globalThis.String(object.name) : undefined,
             sortOrder: isSet(object.sortOrder) ? globalThis.Number(object.sortOrder) : undefined,
-            status: isSet(object.status) ? (0, types_1.publicServiceStatusFromJSON)(object.status) : undefined,
+            status: isSet(object.status) ? (0, publicServiceCode_1.publicServiceStatusFromJSON)(object.status) : undefined,
             appVersions: isSet(object.appVersions)
-                ? types_1.PublicServiceAppVersionsBySession.fromJSON(object.appVersions)
+                ? version_1.PublicServiceAppVersionsBySession.fromJSON(object.appVersions)
                 : undefined,
             platformMinVersion: isSet(object.platformMinVersion)
-                ? types_1.SingleVersionRecord.fromJSON(object.platformMinVersion)
+                ? version_1.SingleVersionRecord.fromJSON(object.platformMinVersion)
                 : undefined,
-            profileFeature: isSet(object.profileFeature) ? (0, types_1.profileFeatureFromJSON)(object.profileFeature) : undefined,
+            profileFeature: isSet(object.profileFeature) ? (0, profileFeature_1.profileFeatureFromJSON)(object.profileFeature) : undefined,
             segments: globalThis.Array.isArray(object?.segments) ? object.segments.map((e) => globalThis.String(e)) : [],
             categories: globalThis.Array.isArray(object?.categories)
-                ? object.categories.map((e) => (0, types_1.publicServiceCategoryCodeFromJSON)(e))
+                ? object.categories.map((e) => (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(e))
                 : [],
             contextMenu: globalThis.Array.isArray(object?.contextMenu)
-                ? object.contextMenu.map((e) => types_1.PublicServiceContextMenu.fromJSON(e))
+                ? object.contextMenu.map((e) => contextMenu_1.PublicServiceContextMenu.fromJSON(e))
                 : [],
             sessionTypes: globalThis.Array.isArray(object?.sessionTypes)
-                ? object.sessionTypes.map((e) => (0, types_1.sessionTypeFromJSON)(e))
+                ? object.sessionTypes.map((e) => (0, sessionType_1.sessionTypeFromJSON)(e))
                 : [],
             locales: isObject(object.locales)
                 ? Object.entries(object.locales).reduce((acc, [key, value]) => {
@@ -1055,28 +1059,28 @@ exports.UpdatePublicServiceRequest = {
             obj.sortOrder = Math.round(message.sortOrder);
         }
         if (message.status !== undefined) {
-            obj.status = (0, types_1.publicServiceStatusToJSON)(message.status);
+            obj.status = (0, publicServiceCode_1.publicServiceStatusToJSON)(message.status);
         }
         if (message.appVersions !== undefined) {
-            obj.appVersions = types_1.PublicServiceAppVersionsBySession.toJSON(message.appVersions);
+            obj.appVersions = version_1.PublicServiceAppVersionsBySession.toJSON(message.appVersions);
         }
         if (message.platformMinVersion !== undefined) {
-            obj.platformMinVersion = types_1.SingleVersionRecord.toJSON(message.platformMinVersion);
+            obj.platformMinVersion = version_1.SingleVersionRecord.toJSON(message.platformMinVersion);
         }
         if (message.profileFeature !== undefined) {
-            obj.profileFeature = (0, types_1.profileFeatureToJSON)(message.profileFeature);
+            obj.profileFeature = (0, profileFeature_1.profileFeatureToJSON)(message.profileFeature);
         }
         if (message.segments?.length) {
             obj.segments = message.segments;
         }
         if (message.categories?.length) {
-            obj.categories = message.categories.map((e) => (0, types_1.publicServiceCategoryCodeToJSON)(e));
+            obj.categories = message.categories.map((e) => (0, publicServiceCodes_1.publicServiceCategoryCodeToJSON)(e));
         }
         if (message.contextMenu?.length) {
-            obj.contextMenu = message.contextMenu.map((e) => types_1.PublicServiceContextMenu.toJSON(e));
+            obj.contextMenu = message.contextMenu.map((e) => contextMenu_1.PublicServiceContextMenu.toJSON(e));
         }
         if (message.sessionTypes?.length) {
-            obj.sessionTypes = message.sessionTypes.map((e) => (0, types_1.sessionTypeToJSON)(e));
+            obj.sessionTypes = message.sessionTypes.map((e) => (0, sessionType_1.sessionTypeToJSON)(e));
         }
         if (message.locales) {
             const entries = Object.entries(message.locales);
@@ -1099,15 +1103,15 @@ exports.UpdatePublicServiceRequest = {
         message.sortOrder = object.sortOrder ?? undefined;
         message.status = object.status ?? undefined;
         message.appVersions = (object.appVersions !== undefined && object.appVersions !== null)
-            ? types_1.PublicServiceAppVersionsBySession.fromPartial(object.appVersions)
+            ? version_1.PublicServiceAppVersionsBySession.fromPartial(object.appVersions)
             : undefined;
         message.platformMinVersion = (object.platformMinVersion !== undefined && object.platformMinVersion !== null)
-            ? types_1.SingleVersionRecord.fromPartial(object.platformMinVersion)
+            ? version_1.SingleVersionRecord.fromPartial(object.platformMinVersion)
             : undefined;
         message.profileFeature = object.profileFeature ?? undefined;
         message.segments = object.segments?.map((e) => e) || [];
         message.categories = object.categories?.map((e) => e) || [];
-        message.contextMenu = object.contextMenu?.map((e) => types_1.PublicServiceContextMenu.fromPartial(e)) || [];
+        message.contextMenu = object.contextMenu?.map((e) => contextMenu_1.PublicServiceContextMenu.fromPartial(e)) || [];
         message.sessionTypes = object.sessionTypes?.map((e) => e) || [];
         message.locales = Object.entries(object.locales ?? {}).reduce((acc, [key, value]) => {
             if (value !== undefined) {
@@ -1214,7 +1218,7 @@ exports.UpdatePublicServiceCategoryRequest = {
         }
         writer.uint32(50).fork();
         for (const v of message.tabCodes) {
-            writer.int32((0, types_1.publicServiceTabCodeToNumber)(v));
+            writer.int32((0, publicServiceCode_1.publicServiceTabCodeToNumber)(v));
         }
         writer.ldelim();
         Object.entries(message.locales).forEach(([key, value]) => {
@@ -1262,13 +1266,13 @@ exports.UpdatePublicServiceCategoryRequest = {
                     continue;
                 case 6:
                     if (tag === 48) {
-                        message.tabCodes.push((0, types_1.publicServiceTabCodeFromJSON)(reader.int32()));
+                        message.tabCodes.push((0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32()));
                         continue;
                     }
                     if (tag === 50) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
-                            message.tabCodes.push((0, types_1.publicServiceTabCodeFromJSON)(reader.int32()));
+                            message.tabCodes.push((0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32()));
                         }
                         continue;
                     }
@@ -1298,7 +1302,7 @@ exports.UpdatePublicServiceCategoryRequest = {
             sortOrder: isSet(object.sortOrder) ? globalThis.Number(object.sortOrder) : undefined,
             status: isSet(object.status) ? publicServiceCategoryStatusFromJSON(object.status) : undefined,
             tabCodes: globalThis.Array.isArray(object?.tabCodes)
-                ? object.tabCodes.map((e) => (0, types_1.publicServiceTabCodeFromJSON)(e))
+                ? object.tabCodes.map((e) => (0, publicServiceCode_1.publicServiceTabCodeFromJSON)(e))
                 : [],
             locales: isObject(object.locales)
                 ? Object.entries(object.locales).reduce((acc, [key, value]) => {
@@ -1326,7 +1330,7 @@ exports.UpdatePublicServiceCategoryRequest = {
             obj.status = publicServiceCategoryStatusToJSON(message.status);
         }
         if (message.tabCodes?.length) {
-            obj.tabCodes = message.tabCodes.map((e) => (0, types_1.publicServiceTabCodeToJSON)(e));
+            obj.tabCodes = message.tabCodes.map((e) => (0, publicServiceCode_1.publicServiceTabCodeToJSON)(e));
         }
         if (message.locales) {
             const entries = Object.entries(message.locales);
@@ -1426,15 +1430,15 @@ exports.UpdatePublicServiceCategoryRequestLocalesEntry = {
     },
 };
 function createBasePublicServiceTab() {
-    return { name: "", code: types_1.PublicServiceTabCode.citizen };
+    return { name: "", code: publicServiceCode_1.PublicServiceTabCode.citizen };
 }
 exports.PublicServiceTab = {
     encode(message, writer = _m0.Writer.create()) {
         if (message.name !== "") {
             writer.uint32(10).string(message.name);
         }
-        if (message.code !== types_1.PublicServiceTabCode.citizen) {
-            writer.uint32(16).int32((0, types_1.publicServiceTabCodeToNumber)(message.code));
+        if (message.code !== publicServiceCode_1.PublicServiceTabCode.citizen) {
+            writer.uint32(16).int32((0, publicServiceCode_1.publicServiceTabCodeToNumber)(message.code));
         }
         return writer;
     },
@@ -1455,7 +1459,7 @@ exports.PublicServiceTab = {
                     if (tag !== 16) {
                         break;
                     }
-                    message.code = (0, types_1.publicServiceTabCodeFromJSON)(reader.int32());
+                    message.code = (0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -1468,7 +1472,7 @@ exports.PublicServiceTab = {
     fromJSON(object) {
         return {
             name: isSet(object.name) ? globalThis.String(object.name) : "",
-            code: isSet(object.code) ? (0, types_1.publicServiceTabCodeFromJSON)(object.code) : types_1.PublicServiceTabCode.citizen,
+            code: isSet(object.code) ? (0, publicServiceCode_1.publicServiceTabCodeFromJSON)(object.code) : publicServiceCode_1.PublicServiceTabCode.citizen,
         };
     },
     toJSON(message) {
@@ -1476,8 +1480,8 @@ exports.PublicServiceTab = {
         if (message.name !== "") {
             obj.name = message.name;
         }
-        if (message.code !== types_1.PublicServiceTabCode.citizen) {
-            obj.code = (0, types_1.publicServiceTabCodeToJSON)(message.code);
+        if (message.code !== publicServiceCode_1.PublicServiceTabCode.citizen) {
+            obj.code = (0, publicServiceCode_1.publicServiceTabCodeToJSON)(message.code);
         }
         return obj;
     },
@@ -1487,27 +1491,27 @@ exports.PublicServiceTab = {
     fromPartial(object) {
         const message = createBasePublicServiceTab();
         message.name = object.name ?? "";
-        message.code = object.code ?? types_1.PublicServiceTabCode.citizen;
+        message.code = object.code ?? publicServiceCode_1.PublicServiceTabCode.citizen;
         return message;
     },
 };
 function createBasePublicServiceCategoryResponse() {
     return {
-        code: types_1.PublicServiceCategoryCode.carServices,
+        code: publicServiceCodes_1.PublicServiceCategoryCode.carServices,
         icon: "",
         name: "",
         status: PublicServiceCategoryStatus.active,
         visibleSearch: false,
         sortOrder: 0,
         publicServices: [],
-        tabCode: types_1.PublicServiceTabCode.citizen,
+        tabCode: publicServiceCode_1.PublicServiceTabCode.citizen,
         tabCodes: [],
     };
 }
 exports.PublicServiceCategoryResponse = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.code !== types_1.PublicServiceCategoryCode.carServices) {
-            writer.uint32(8).int32((0, types_1.publicServiceCategoryCodeToNumber)(message.code));
+        if (message.code !== publicServiceCodes_1.PublicServiceCategoryCode.carServices) {
+            writer.uint32(8).int32((0, publicServiceCodes_1.publicServiceCategoryCodeToNumber)(message.code));
         }
         if (message.icon !== "") {
             writer.uint32(18).string(message.icon);
@@ -1518,7 +1522,7 @@ exports.PublicServiceCategoryResponse = {
         if (message.status !== PublicServiceCategoryStatus.active) {
             writer.uint32(32).int32(publicServiceCategoryStatusToNumber(message.status));
         }
-        if (message.visibleSearch === true) {
+        if (message.visibleSearch !== false) {
             writer.uint32(40).bool(message.visibleSearch);
         }
         if (message.sortOrder !== 0) {
@@ -1527,12 +1531,12 @@ exports.PublicServiceCategoryResponse = {
         for (const v of message.publicServices) {
             exports.PublicServiceResponse.encode(v, writer.uint32(58).fork()).ldelim();
         }
-        if (message.tabCode !== types_1.PublicServiceTabCode.citizen) {
-            writer.uint32(64).int32((0, types_1.publicServiceTabCodeToNumber)(message.tabCode));
+        if (message.tabCode !== publicServiceCode_1.PublicServiceTabCode.citizen) {
+            writer.uint32(64).int32((0, publicServiceCode_1.publicServiceTabCodeToNumber)(message.tabCode));
         }
         writer.uint32(74).fork();
         for (const v of message.tabCodes) {
-            writer.int32((0, types_1.publicServiceTabCodeToNumber)(v));
+            writer.int32((0, publicServiceCode_1.publicServiceTabCodeToNumber)(v));
         }
         writer.ldelim();
         return writer;
@@ -1548,7 +1552,7 @@ exports.PublicServiceCategoryResponse = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.code = (0, types_1.publicServiceCategoryCodeFromJSON)(reader.int32());
+                    message.code = (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(reader.int32());
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -1590,17 +1594,17 @@ exports.PublicServiceCategoryResponse = {
                     if (tag !== 64) {
                         break;
                     }
-                    message.tabCode = (0, types_1.publicServiceTabCodeFromJSON)(reader.int32());
+                    message.tabCode = (0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32());
                     continue;
                 case 9:
                     if (tag === 72) {
-                        message.tabCodes.push((0, types_1.publicServiceTabCodeFromJSON)(reader.int32()));
+                        message.tabCodes.push((0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32()));
                         continue;
                     }
                     if (tag === 74) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
-                            message.tabCodes.push((0, types_1.publicServiceTabCodeFromJSON)(reader.int32()));
+                            message.tabCodes.push((0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32()));
                         }
                         continue;
                     }
@@ -1615,7 +1619,7 @@ exports.PublicServiceCategoryResponse = {
     },
     fromJSON(object) {
         return {
-            code: isSet(object.code) ? (0, types_1.publicServiceCategoryCodeFromJSON)(object.code) : types_1.PublicServiceCategoryCode.carServices,
+            code: isSet(object.code) ? (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(object.code) : publicServiceCodes_1.PublicServiceCategoryCode.carServices,
             icon: isSet(object.icon) ? globalThis.String(object.icon) : "",
             name: isSet(object.name) ? globalThis.String(object.name) : "",
             status: isSet(object.status)
@@ -1626,16 +1630,16 @@ exports.PublicServiceCategoryResponse = {
             publicServices: globalThis.Array.isArray(object?.publicServices)
                 ? object.publicServices.map((e) => exports.PublicServiceResponse.fromJSON(e))
                 : [],
-            tabCode: isSet(object.tabCode) ? (0, types_1.publicServiceTabCodeFromJSON)(object.tabCode) : types_1.PublicServiceTabCode.citizen,
+            tabCode: isSet(object.tabCode) ? (0, publicServiceCode_1.publicServiceTabCodeFromJSON)(object.tabCode) : publicServiceCode_1.PublicServiceTabCode.citizen,
             tabCodes: globalThis.Array.isArray(object?.tabCodes)
-                ? object.tabCodes.map((e) => (0, types_1.publicServiceTabCodeFromJSON)(e))
+                ? object.tabCodes.map((e) => (0, publicServiceCode_1.publicServiceTabCodeFromJSON)(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.code !== types_1.PublicServiceCategoryCode.carServices) {
-            obj.code = (0, types_1.publicServiceCategoryCodeToJSON)(message.code);
+        if (message.code !== publicServiceCodes_1.PublicServiceCategoryCode.carServices) {
+            obj.code = (0, publicServiceCodes_1.publicServiceCategoryCodeToJSON)(message.code);
         }
         if (message.icon !== "") {
             obj.icon = message.icon;
@@ -1646,7 +1650,7 @@ exports.PublicServiceCategoryResponse = {
         if (message.status !== PublicServiceCategoryStatus.active) {
             obj.status = publicServiceCategoryStatusToJSON(message.status);
         }
-        if (message.visibleSearch === true) {
+        if (message.visibleSearch !== false) {
             obj.visibleSearch = message.visibleSearch;
         }
         if (message.sortOrder !== 0) {
@@ -1655,11 +1659,11 @@ exports.PublicServiceCategoryResponse = {
         if (message.publicServices?.length) {
             obj.publicServices = message.publicServices.map((e) => exports.PublicServiceResponse.toJSON(e));
         }
-        if (message.tabCode !== types_1.PublicServiceTabCode.citizen) {
-            obj.tabCode = (0, types_1.publicServiceTabCodeToJSON)(message.tabCode);
+        if (message.tabCode !== publicServiceCode_1.PublicServiceTabCode.citizen) {
+            obj.tabCode = (0, publicServiceCode_1.publicServiceTabCodeToJSON)(message.tabCode);
         }
         if (message.tabCodes?.length) {
-            obj.tabCodes = message.tabCodes.map((e) => (0, types_1.publicServiceTabCodeToJSON)(e));
+            obj.tabCodes = message.tabCodes.map((e) => (0, publicServiceCode_1.publicServiceTabCodeToJSON)(e));
         }
         return obj;
     },
@@ -1668,23 +1672,23 @@ exports.PublicServiceCategoryResponse = {
     },
     fromPartial(object) {
         const message = createBasePublicServiceCategoryResponse();
-        message.code = object.code ?? types_1.PublicServiceCategoryCode.carServices;
+        message.code = object.code ?? publicServiceCodes_1.PublicServiceCategoryCode.carServices;
         message.icon = object.icon ?? "";
         message.name = object.name ?? "";
         message.status = object.status ?? PublicServiceCategoryStatus.active;
         message.visibleSearch = object.visibleSearch ?? false;
         message.sortOrder = object.sortOrder ?? 0;
         message.publicServices = object.publicServices?.map((e) => exports.PublicServiceResponse.fromPartial(e)) || [];
-        message.tabCode = object.tabCode ?? types_1.PublicServiceTabCode.citizen;
+        message.tabCode = object.tabCode ?? publicServiceCode_1.PublicServiceTabCode.citizen;
         message.tabCodes = object.tabCodes?.map((e) => e) || [];
         return message;
     },
 };
 function createBasePublicServiceResponse() {
     return {
-        code: types_1.PublicServiceCode.administrativeFees,
+        code: publicServiceCode_1.PublicServiceCode.administrativeFees,
         name: "",
-        status: types_1.PublicServiceStatus.active,
+        status: publicServiceCode_1.PublicServiceStatus.active,
         sortOrder: 0,
         search: "",
         contextMenu: [],
@@ -1692,14 +1696,14 @@ function createBasePublicServiceResponse() {
 }
 exports.PublicServiceResponse = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            writer.uint32(8).int32((0, types_1.publicServiceCodeToNumber)(message.code));
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            writer.uint32(8).int32((0, publicServiceCode_1.publicServiceCodeToNumber)(message.code));
         }
         if (message.name !== "") {
             writer.uint32(18).string(message.name);
         }
-        if (message.status !== types_1.PublicServiceStatus.active) {
-            writer.uint32(24).int32((0, types_1.publicServiceStatusToNumber)(message.status));
+        if (message.status !== publicServiceCode_1.PublicServiceStatus.active) {
+            writer.uint32(24).int32((0, publicServiceCode_1.publicServiceStatusToNumber)(message.status));
         }
         if (message.sortOrder !== 0) {
             writer.uint32(32).int32(message.sortOrder);
@@ -1708,7 +1712,7 @@ exports.PublicServiceResponse = {
             writer.uint32(42).string(message.search);
         }
         for (const v of message.contextMenu) {
-            types_1.PublicServiceContextMenu.encode(v, writer.uint32(50).fork()).ldelim();
+            contextMenu_1.PublicServiceContextMenu.encode(v, writer.uint32(50).fork()).ldelim();
         }
         return writer;
     },
@@ -1723,7 +1727,7 @@ exports.PublicServiceResponse = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.code = (0, types_1.publicServiceCodeFromJSON)(reader.int32());
+                    message.code = (0, publicServiceCode_1.publicServiceCodeFromJSON)(reader.int32());
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -1735,7 +1739,7 @@ exports.PublicServiceResponse = {
                     if (tag !== 24) {
                         break;
                     }
-                    message.status = (0, types_1.publicServiceStatusFromJSON)(reader.int32());
+                    message.status = (0, publicServiceCode_1.publicServiceStatusFromJSON)(reader.int32());
                     continue;
                 case 4:
                     if (tag !== 32) {
@@ -1753,7 +1757,7 @@ exports.PublicServiceResponse = {
                     if (tag !== 50) {
                         break;
                     }
-                    message.contextMenu.push(types_1.PublicServiceContextMenu.decode(reader, reader.uint32()));
+                    message.contextMenu.push(contextMenu_1.PublicServiceContextMenu.decode(reader, reader.uint32()));
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -1765,26 +1769,26 @@ exports.PublicServiceResponse = {
     },
     fromJSON(object) {
         return {
-            code: isSet(object.code) ? (0, types_1.publicServiceCodeFromJSON)(object.code) : types_1.PublicServiceCode.administrativeFees,
+            code: isSet(object.code) ? (0, publicServiceCode_1.publicServiceCodeFromJSON)(object.code) : publicServiceCode_1.PublicServiceCode.administrativeFees,
             name: isSet(object.name) ? globalThis.String(object.name) : "",
-            status: isSet(object.status) ? (0, types_1.publicServiceStatusFromJSON)(object.status) : types_1.PublicServiceStatus.active,
+            status: isSet(object.status) ? (0, publicServiceCode_1.publicServiceStatusFromJSON)(object.status) : publicServiceCode_1.PublicServiceStatus.active,
             sortOrder: isSet(object.sortOrder) ? globalThis.Number(object.sortOrder) : 0,
             search: isSet(object.search) ? globalThis.String(object.search) : "",
             contextMenu: globalThis.Array.isArray(object?.contextMenu)
-                ? object.contextMenu.map((e) => types_1.PublicServiceContextMenu.fromJSON(e))
+                ? object.contextMenu.map((e) => contextMenu_1.PublicServiceContextMenu.fromJSON(e))
                 : [],
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            obj.code = (0, types_1.publicServiceCodeToJSON)(message.code);
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            obj.code = (0, publicServiceCode_1.publicServiceCodeToJSON)(message.code);
         }
         if (message.name !== "") {
             obj.name = message.name;
         }
-        if (message.status !== types_1.PublicServiceStatus.active) {
-            obj.status = (0, types_1.publicServiceStatusToJSON)(message.status);
+        if (message.status !== publicServiceCode_1.PublicServiceStatus.active) {
+            obj.status = (0, publicServiceCode_1.publicServiceStatusToJSON)(message.status);
         }
         if (message.sortOrder !== 0) {
             obj.sortOrder = Math.round(message.sortOrder);
@@ -1793,7 +1797,7 @@ exports.PublicServiceResponse = {
             obj.search = message.search;
         }
         if (message.contextMenu?.length) {
-            obj.contextMenu = message.contextMenu.map((e) => types_1.PublicServiceContextMenu.toJSON(e));
+            obj.contextMenu = message.contextMenu.map((e) => contextMenu_1.PublicServiceContextMenu.toJSON(e));
         }
         return obj;
     },
@@ -1802,21 +1806,21 @@ exports.PublicServiceResponse = {
     },
     fromPartial(object) {
         const message = createBasePublicServiceResponse();
-        message.code = object.code ?? types_1.PublicServiceCode.administrativeFees;
+        message.code = object.code ?? publicServiceCode_1.PublicServiceCode.administrativeFees;
         message.name = object.name ?? "";
-        message.status = object.status ?? types_1.PublicServiceStatus.active;
+        message.status = object.status ?? publicServiceCode_1.PublicServiceStatus.active;
         message.sortOrder = object.sortOrder ?? 0;
         message.search = object.search ?? "";
-        message.contextMenu = object.contextMenu?.map((e) => types_1.PublicServiceContextMenu.fromPartial(e)) || [];
+        message.contextMenu = object.contextMenu?.map((e) => contextMenu_1.PublicServiceContextMenu.fromPartial(e)) || [];
         return message;
     },
 };
 function createBasePublicService() {
     return {
-        code: types_1.PublicServiceCode.administrativeFees,
+        code: publicServiceCode_1.PublicServiceCode.administrativeFees,
         name: "",
         sortOrder: 0,
-        status: types_1.PublicServiceStatus.active,
+        status: publicServiceCode_1.PublicServiceStatus.active,
         locales: {},
         categories: [],
         segments: [],
@@ -1829,8 +1833,8 @@ function createBasePublicService() {
 }
 exports.PublicService = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            writer.uint32(8).int32((0, types_1.publicServiceCodeToNumber)(message.code));
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            writer.uint32(8).int32((0, publicServiceCode_1.publicServiceCodeToNumber)(message.code));
         }
         if (message.name !== "") {
             writer.uint32(18).string(message.name);
@@ -1838,36 +1842,36 @@ exports.PublicService = {
         if (message.sortOrder !== 0) {
             writer.uint32(24).int32(message.sortOrder);
         }
-        if (message.status !== types_1.PublicServiceStatus.active) {
-            writer.uint32(32).int32((0, types_1.publicServiceStatusToNumber)(message.status));
+        if (message.status !== publicServiceCode_1.PublicServiceStatus.active) {
+            writer.uint32(32).int32((0, publicServiceCode_1.publicServiceStatusToNumber)(message.status));
         }
         Object.entries(message.locales).forEach(([key, value]) => {
             exports.PublicServiceLocalesEntry.encode({ key: key, value }, writer.uint32(42).fork()).ldelim();
         });
         writer.uint32(50).fork();
         for (const v of message.categories) {
-            writer.int32((0, types_1.publicServiceCategoryCodeToNumber)(v));
+            writer.int32((0, publicServiceCodes_1.publicServiceCategoryCodeToNumber)(v));
         }
         writer.ldelim();
         for (const v of message.segments) {
             writer.uint32(58).string(v);
         }
         for (const v of message.contextMenu) {
-            types_1.PublicServiceContextMenu.encode(v, writer.uint32(66).fork()).ldelim();
+            contextMenu_1.PublicServiceContextMenu.encode(v, writer.uint32(66).fork()).ldelim();
         }
         writer.uint32(74).fork();
         for (const v of message.sessionTypes) {
-            writer.int32((0, types_1.sessionTypeToNumber)(v));
+            writer.int32((0, sessionType_1.sessionTypeToNumber)(v));
         }
         writer.ldelim();
         if (message.appVersions !== undefined) {
-            types_1.PublicServiceAppVersionsBySession.encode(message.appVersions, writer.uint32(82).fork()).ldelim();
+            version_1.PublicServiceAppVersionsBySession.encode(message.appVersions, writer.uint32(82).fork()).ldelim();
         }
         if (message.platformMinVersion !== undefined) {
-            types_1.SingleVersionRecord.encode(message.platformMinVersion, writer.uint32(90).fork()).ldelim();
+            version_1.SingleVersionRecord.encode(message.platformMinVersion, writer.uint32(90).fork()).ldelim();
         }
         if (message.profileFeature !== undefined) {
-            writer.uint32(96).int32((0, types_1.profileFeatureToNumber)(message.profileFeature));
+            writer.uint32(96).int32((0, profileFeature_1.profileFeatureToNumber)(message.profileFeature));
         }
         return writer;
     },
@@ -1882,7 +1886,7 @@ exports.PublicService = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.code = (0, types_1.publicServiceCodeFromJSON)(reader.int32());
+                    message.code = (0, publicServiceCode_1.publicServiceCodeFromJSON)(reader.int32());
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -1900,7 +1904,7 @@ exports.PublicService = {
                     if (tag !== 32) {
                         break;
                     }
-                    message.status = (0, types_1.publicServiceStatusFromJSON)(reader.int32());
+                    message.status = (0, publicServiceCode_1.publicServiceStatusFromJSON)(reader.int32());
                     continue;
                 case 5:
                     if (tag !== 42) {
@@ -1913,13 +1917,13 @@ exports.PublicService = {
                     continue;
                 case 6:
                     if (tag === 48) {
-                        message.categories.push((0, types_1.publicServiceCategoryCodeFromJSON)(reader.int32()));
+                        message.categories.push((0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(reader.int32()));
                         continue;
                     }
                     if (tag === 50) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
-                            message.categories.push((0, types_1.publicServiceCategoryCodeFromJSON)(reader.int32()));
+                            message.categories.push((0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(reader.int32()));
                         }
                         continue;
                     }
@@ -1934,17 +1938,17 @@ exports.PublicService = {
                     if (tag !== 66) {
                         break;
                     }
-                    message.contextMenu.push(types_1.PublicServiceContextMenu.decode(reader, reader.uint32()));
+                    message.contextMenu.push(contextMenu_1.PublicServiceContextMenu.decode(reader, reader.uint32()));
                     continue;
                 case 9:
                     if (tag === 72) {
-                        message.sessionTypes.push((0, types_1.sessionTypeFromJSON)(reader.int32()));
+                        message.sessionTypes.push((0, sessionType_1.sessionTypeFromJSON)(reader.int32()));
                         continue;
                     }
                     if (tag === 74) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
-                            message.sessionTypes.push((0, types_1.sessionTypeFromJSON)(reader.int32()));
+                            message.sessionTypes.push((0, sessionType_1.sessionTypeFromJSON)(reader.int32()));
                         }
                         continue;
                     }
@@ -1953,19 +1957,19 @@ exports.PublicService = {
                     if (tag !== 82) {
                         break;
                     }
-                    message.appVersions = types_1.PublicServiceAppVersionsBySession.decode(reader, reader.uint32());
+                    message.appVersions = version_1.PublicServiceAppVersionsBySession.decode(reader, reader.uint32());
                     continue;
                 case 11:
                     if (tag !== 90) {
                         break;
                     }
-                    message.platformMinVersion = types_1.SingleVersionRecord.decode(reader, reader.uint32());
+                    message.platformMinVersion = version_1.SingleVersionRecord.decode(reader, reader.uint32());
                     continue;
                 case 12:
                     if (tag !== 96) {
                         break;
                     }
-                    message.profileFeature = (0, types_1.profileFeatureFromJSON)(reader.int32());
+                    message.profileFeature = (0, profileFeature_1.profileFeatureFromJSON)(reader.int32());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -1977,10 +1981,10 @@ exports.PublicService = {
     },
     fromJSON(object) {
         return {
-            code: isSet(object.code) ? (0, types_1.publicServiceCodeFromJSON)(object.code) : types_1.PublicServiceCode.administrativeFees,
+            code: isSet(object.code) ? (0, publicServiceCode_1.publicServiceCodeFromJSON)(object.code) : publicServiceCode_1.PublicServiceCode.administrativeFees,
             name: isSet(object.name) ? globalThis.String(object.name) : "",
             sortOrder: isSet(object.sortOrder) ? globalThis.Number(object.sortOrder) : 0,
-            status: isSet(object.status) ? (0, types_1.publicServiceStatusFromJSON)(object.status) : types_1.PublicServiceStatus.active,
+            status: isSet(object.status) ? (0, publicServiceCode_1.publicServiceStatusFromJSON)(object.status) : publicServiceCode_1.PublicServiceStatus.active,
             locales: isObject(object.locales)
                 ? Object.entries(object.locales).reduce((acc, [key, value]) => {
                     acc[key] = String(value);
@@ -1988,28 +1992,28 @@ exports.PublicService = {
                 }, {})
                 : {},
             categories: globalThis.Array.isArray(object?.categories)
-                ? object.categories.map((e) => (0, types_1.publicServiceCategoryCodeFromJSON)(e))
+                ? object.categories.map((e) => (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(e))
                 : [],
             segments: globalThis.Array.isArray(object?.segments) ? object.segments.map((e) => globalThis.String(e)) : [],
             contextMenu: globalThis.Array.isArray(object?.contextMenu)
-                ? object.contextMenu.map((e) => types_1.PublicServiceContextMenu.fromJSON(e))
+                ? object.contextMenu.map((e) => contextMenu_1.PublicServiceContextMenu.fromJSON(e))
                 : [],
             sessionTypes: globalThis.Array.isArray(object?.sessionTypes)
-                ? object.sessionTypes.map((e) => (0, types_1.sessionTypeFromJSON)(e))
+                ? object.sessionTypes.map((e) => (0, sessionType_1.sessionTypeFromJSON)(e))
                 : [],
             appVersions: isSet(object.appVersions)
-                ? types_1.PublicServiceAppVersionsBySession.fromJSON(object.appVersions)
+                ? version_1.PublicServiceAppVersionsBySession.fromJSON(object.appVersions)
                 : undefined,
             platformMinVersion: isSet(object.platformMinVersion)
-                ? types_1.SingleVersionRecord.fromJSON(object.platformMinVersion)
+                ? version_1.SingleVersionRecord.fromJSON(object.platformMinVersion)
                 : undefined,
-            profileFeature: isSet(object.profileFeature) ? (0, types_1.profileFeatureFromJSON)(object.profileFeature) : undefined,
+            profileFeature: isSet(object.profileFeature) ? (0, profileFeature_1.profileFeatureFromJSON)(object.profileFeature) : undefined,
         };
     },
     toJSON(message) {
         const obj = {};
-        if (message.code !== types_1.PublicServiceCode.administrativeFees) {
-            obj.code = (0, types_1.publicServiceCodeToJSON)(message.code);
+        if (message.code !== publicServiceCode_1.PublicServiceCode.administrativeFees) {
+            obj.code = (0, publicServiceCode_1.publicServiceCodeToJSON)(message.code);
         }
         if (message.name !== "") {
             obj.name = message.name;
@@ -2017,8 +2021,8 @@ exports.PublicService = {
         if (message.sortOrder !== 0) {
             obj.sortOrder = Math.round(message.sortOrder);
         }
-        if (message.status !== types_1.PublicServiceStatus.active) {
-            obj.status = (0, types_1.publicServiceStatusToJSON)(message.status);
+        if (message.status !== publicServiceCode_1.PublicServiceStatus.active) {
+            obj.status = (0, publicServiceCode_1.publicServiceStatusToJSON)(message.status);
         }
         if (message.locales) {
             const entries = Object.entries(message.locales);
@@ -2030,25 +2034,25 @@ exports.PublicService = {
             }
         }
         if (message.categories?.length) {
-            obj.categories = message.categories.map((e) => (0, types_1.publicServiceCategoryCodeToJSON)(e));
+            obj.categories = message.categories.map((e) => (0, publicServiceCodes_1.publicServiceCategoryCodeToJSON)(e));
         }
         if (message.segments?.length) {
             obj.segments = message.segments;
         }
         if (message.contextMenu?.length) {
-            obj.contextMenu = message.contextMenu.map((e) => types_1.PublicServiceContextMenu.toJSON(e));
+            obj.contextMenu = message.contextMenu.map((e) => contextMenu_1.PublicServiceContextMenu.toJSON(e));
         }
         if (message.sessionTypes?.length) {
-            obj.sessionTypes = message.sessionTypes.map((e) => (0, types_1.sessionTypeToJSON)(e));
+            obj.sessionTypes = message.sessionTypes.map((e) => (0, sessionType_1.sessionTypeToJSON)(e));
         }
         if (message.appVersions !== undefined) {
-            obj.appVersions = types_1.PublicServiceAppVersionsBySession.toJSON(message.appVersions);
+            obj.appVersions = version_1.PublicServiceAppVersionsBySession.toJSON(message.appVersions);
         }
         if (message.platformMinVersion !== undefined) {
-            obj.platformMinVersion = types_1.SingleVersionRecord.toJSON(message.platformMinVersion);
+            obj.platformMinVersion = version_1.SingleVersionRecord.toJSON(message.platformMinVersion);
         }
         if (message.profileFeature !== undefined) {
-            obj.profileFeature = (0, types_1.profileFeatureToJSON)(message.profileFeature);
+            obj.profileFeature = (0, profileFeature_1.profileFeatureToJSON)(message.profileFeature);
         }
         return obj;
     },
@@ -2057,10 +2061,10 @@ exports.PublicService = {
     },
     fromPartial(object) {
         const message = createBasePublicService();
-        message.code = object.code ?? types_1.PublicServiceCode.administrativeFees;
+        message.code = object.code ?? publicServiceCode_1.PublicServiceCode.administrativeFees;
         message.name = object.name ?? "";
         message.sortOrder = object.sortOrder ?? 0;
-        message.status = object.status ?? types_1.PublicServiceStatus.active;
+        message.status = object.status ?? publicServiceCode_1.PublicServiceStatus.active;
         message.locales = Object.entries(object.locales ?? {}).reduce((acc, [key, value]) => {
             if (value !== undefined) {
                 acc[key] = globalThis.String(value);
@@ -2069,13 +2073,13 @@ exports.PublicService = {
         }, {});
         message.categories = object.categories?.map((e) => e) || [];
         message.segments = object.segments?.map((e) => e) || [];
-        message.contextMenu = object.contextMenu?.map((e) => types_1.PublicServiceContextMenu.fromPartial(e)) || [];
+        message.contextMenu = object.contextMenu?.map((e) => contextMenu_1.PublicServiceContextMenu.fromPartial(e)) || [];
         message.sessionTypes = object.sessionTypes?.map((e) => e) || [];
         message.appVersions = (object.appVersions !== undefined && object.appVersions !== null)
-            ? types_1.PublicServiceAppVersionsBySession.fromPartial(object.appVersions)
+            ? version_1.PublicServiceAppVersionsBySession.fromPartial(object.appVersions)
             : undefined;
         message.platformMinVersion = (object.platformMinVersion !== undefined && object.platformMinVersion !== null)
-            ? types_1.SingleVersionRecord.fromPartial(object.platformMinVersion)
+            ? version_1.SingleVersionRecord.fromPartial(object.platformMinVersion)
             : undefined;
         message.profileFeature = object.profileFeature ?? undefined;
         return message;
@@ -2149,7 +2153,7 @@ exports.PublicServiceLocalesEntry = {
 };
 function createBasePublicServiceCategory() {
     return {
-        category: types_1.PublicServiceCategoryCode.carServices,
+        category: publicServiceCodes_1.PublicServiceCategoryCode.carServices,
         name: "",
         icon: "",
         sortOrder: 0,
@@ -2160,8 +2164,8 @@ function createBasePublicServiceCategory() {
 }
 exports.PublicServiceCategory = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.category !== types_1.PublicServiceCategoryCode.carServices) {
-            writer.uint32(8).int32((0, types_1.publicServiceCategoryCodeToNumber)(message.category));
+        if (message.category !== publicServiceCodes_1.PublicServiceCategoryCode.carServices) {
+            writer.uint32(8).int32((0, publicServiceCodes_1.publicServiceCategoryCodeToNumber)(message.category));
         }
         if (message.name !== "") {
             writer.uint32(18).string(message.name);
@@ -2177,7 +2181,7 @@ exports.PublicServiceCategory = {
         }
         writer.uint32(50).fork();
         for (const v of message.tabCodes) {
-            writer.int32((0, types_1.publicServiceTabCodeToNumber)(v));
+            writer.int32((0, publicServiceCode_1.publicServiceTabCodeToNumber)(v));
         }
         writer.ldelim();
         Object.entries(message.locales).forEach(([key, value]) => {
@@ -2196,7 +2200,7 @@ exports.PublicServiceCategory = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.category = (0, types_1.publicServiceCategoryCodeFromJSON)(reader.int32());
+                    message.category = (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(reader.int32());
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -2224,13 +2228,13 @@ exports.PublicServiceCategory = {
                     continue;
                 case 6:
                     if (tag === 48) {
-                        message.tabCodes.push((0, types_1.publicServiceTabCodeFromJSON)(reader.int32()));
+                        message.tabCodes.push((0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32()));
                         continue;
                     }
                     if (tag === 50) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
-                            message.tabCodes.push((0, types_1.publicServiceTabCodeFromJSON)(reader.int32()));
+                            message.tabCodes.push((0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32()));
                         }
                         continue;
                     }
@@ -2255,8 +2259,8 @@ exports.PublicServiceCategory = {
     fromJSON(object) {
         return {
             category: isSet(object.category)
-                ? (0, types_1.publicServiceCategoryCodeFromJSON)(object.category)
-                : types_1.PublicServiceCategoryCode.carServices,
+                ? (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(object.category)
+                : publicServiceCodes_1.PublicServiceCategoryCode.carServices,
             name: isSet(object.name) ? globalThis.String(object.name) : "",
             icon: isSet(object.icon) ? globalThis.String(object.icon) : "",
             sortOrder: isSet(object.sortOrder) ? globalThis.Number(object.sortOrder) : 0,
@@ -2264,7 +2268,7 @@ exports.PublicServiceCategory = {
                 ? publicServiceCategoryStatusFromJSON(object.status)
                 : PublicServiceCategoryStatus.active,
             tabCodes: globalThis.Array.isArray(object?.tabCodes)
-                ? object.tabCodes.map((e) => (0, types_1.publicServiceTabCodeFromJSON)(e))
+                ? object.tabCodes.map((e) => (0, publicServiceCode_1.publicServiceTabCodeFromJSON)(e))
                 : [],
             locales: isObject(object.locales)
                 ? Object.entries(object.locales).reduce((acc, [key, value]) => {
@@ -2276,8 +2280,8 @@ exports.PublicServiceCategory = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.category !== types_1.PublicServiceCategoryCode.carServices) {
-            obj.category = (0, types_1.publicServiceCategoryCodeToJSON)(message.category);
+        if (message.category !== publicServiceCodes_1.PublicServiceCategoryCode.carServices) {
+            obj.category = (0, publicServiceCodes_1.publicServiceCategoryCodeToJSON)(message.category);
         }
         if (message.name !== "") {
             obj.name = message.name;
@@ -2292,7 +2296,7 @@ exports.PublicServiceCategory = {
             obj.status = publicServiceCategoryStatusToJSON(message.status);
         }
         if (message.tabCodes?.length) {
-            obj.tabCodes = message.tabCodes.map((e) => (0, types_1.publicServiceTabCodeToJSON)(e));
+            obj.tabCodes = message.tabCodes.map((e) => (0, publicServiceCode_1.publicServiceTabCodeToJSON)(e));
         }
         if (message.locales) {
             const entries = Object.entries(message.locales);
@@ -2310,7 +2314,7 @@ exports.PublicServiceCategory = {
     },
     fromPartial(object) {
         const message = createBasePublicServiceCategory();
-        message.category = object.category ?? types_1.PublicServiceCategoryCode.carServices;
+        message.category = object.category ?? publicServiceCodes_1.PublicServiceCategoryCode.carServices;
         message.name = object.name ?? "";
         message.icon = object.icon ?? "";
         message.sortOrder = object.sortOrder ?? 0;
@@ -2393,7 +2397,7 @@ exports.PublicServiceCategoryLocalesEntry = {
 };
 function createBasePublicServiceCategoryResult() {
     return {
-        category: types_1.PublicServiceCategoryCode.carServices,
+        category: publicServiceCodes_1.PublicServiceCategoryCode.carServices,
         name: "",
         icon: "",
         sortOrder: 0,
@@ -2405,8 +2409,8 @@ function createBasePublicServiceCategoryResult() {
 }
 exports.PublicServiceCategoryResult = {
     encode(message, writer = _m0.Writer.create()) {
-        if (message.category !== types_1.PublicServiceCategoryCode.carServices) {
-            writer.uint32(8).int32((0, types_1.publicServiceCategoryCodeToNumber)(message.category));
+        if (message.category !== publicServiceCodes_1.PublicServiceCategoryCode.carServices) {
+            writer.uint32(8).int32((0, publicServiceCodes_1.publicServiceCategoryCodeToNumber)(message.category));
         }
         if (message.name !== "") {
             writer.uint32(18).string(message.name);
@@ -2422,7 +2426,7 @@ exports.PublicServiceCategoryResult = {
         }
         writer.uint32(50).fork();
         for (const v of message.tabCodes) {
-            writer.int32((0, types_1.publicServiceTabCodeToNumber)(v));
+            writer.int32((0, publicServiceCode_1.publicServiceTabCodeToNumber)(v));
         }
         writer.ldelim();
         Object.entries(message.locales).forEach(([key, value]) => {
@@ -2444,7 +2448,7 @@ exports.PublicServiceCategoryResult = {
                     if (tag !== 8) {
                         break;
                     }
-                    message.category = (0, types_1.publicServiceCategoryCodeFromJSON)(reader.int32());
+                    message.category = (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(reader.int32());
                     continue;
                 case 2:
                     if (tag !== 18) {
@@ -2472,13 +2476,13 @@ exports.PublicServiceCategoryResult = {
                     continue;
                 case 6:
                     if (tag === 48) {
-                        message.tabCodes.push((0, types_1.publicServiceTabCodeFromJSON)(reader.int32()));
+                        message.tabCodes.push((0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32()));
                         continue;
                     }
                     if (tag === 50) {
                         const end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2) {
-                            message.tabCodes.push((0, types_1.publicServiceTabCodeFromJSON)(reader.int32()));
+                            message.tabCodes.push((0, publicServiceCode_1.publicServiceTabCodeFromJSON)(reader.int32()));
                         }
                         continue;
                     }
@@ -2509,8 +2513,8 @@ exports.PublicServiceCategoryResult = {
     fromJSON(object) {
         return {
             category: isSet(object.category)
-                ? (0, types_1.publicServiceCategoryCodeFromJSON)(object.category)
-                : types_1.PublicServiceCategoryCode.carServices,
+                ? (0, publicServiceCodes_1.publicServiceCategoryCodeFromJSON)(object.category)
+                : publicServiceCodes_1.PublicServiceCategoryCode.carServices,
             name: isSet(object.name) ? globalThis.String(object.name) : "",
             icon: isSet(object.icon) ? globalThis.String(object.icon) : "",
             sortOrder: isSet(object.sortOrder) ? globalThis.Number(object.sortOrder) : 0,
@@ -2518,7 +2522,7 @@ exports.PublicServiceCategoryResult = {
                 ? publicServiceCategoryStatusFromJSON(object.status)
                 : PublicServiceCategoryStatus.active,
             tabCodes: globalThis.Array.isArray(object?.tabCodes)
-                ? object.tabCodes.map((e) => (0, types_1.publicServiceTabCodeFromJSON)(e))
+                ? object.tabCodes.map((e) => (0, publicServiceCode_1.publicServiceTabCodeFromJSON)(e))
                 : [],
             locales: isObject(object.locales)
                 ? Object.entries(object.locales).reduce((acc, [key, value]) => {
@@ -2531,8 +2535,8 @@ exports.PublicServiceCategoryResult = {
     },
     toJSON(message) {
         const obj = {};
-        if (message.category !== types_1.PublicServiceCategoryCode.carServices) {
-            obj.category = (0, types_1.publicServiceCategoryCodeToJSON)(message.category);
+        if (message.category !== publicServiceCodes_1.PublicServiceCategoryCode.carServices) {
+            obj.category = (0, publicServiceCodes_1.publicServiceCategoryCodeToJSON)(message.category);
         }
         if (message.name !== "") {
             obj.name = message.name;
@@ -2547,7 +2551,7 @@ exports.PublicServiceCategoryResult = {
             obj.status = publicServiceCategoryStatusToJSON(message.status);
         }
         if (message.tabCodes?.length) {
-            obj.tabCodes = message.tabCodes.map((e) => (0, types_1.publicServiceTabCodeToJSON)(e));
+            obj.tabCodes = message.tabCodes.map((e) => (0, publicServiceCode_1.publicServiceTabCodeToJSON)(e));
         }
         if (message.locales) {
             const entries = Object.entries(message.locales);
@@ -2568,7 +2572,7 @@ exports.PublicServiceCategoryResult = {
     },
     fromPartial(object) {
         const message = createBasePublicServiceCategoryResult();
-        message.category = object.category ?? types_1.PublicServiceCategoryCode.carServices;
+        message.category = object.category ?? publicServiceCodes_1.PublicServiceCategoryCode.carServices;
         message.name = object.name ?? "";
         message.icon = object.icon ?? "";
         message.sortOrder = object.sortOrder ?? 0;
@@ -2747,7 +2751,7 @@ exports.PublicServiceCatalogDefinition = {
             name: "getPublicServiceByCode",
             requestType: exports.GetPublicServiceByCodeRequest,
             requestStream: false,
-            responseType: types_1.PublicServiceSettings,
+            responseType: contextMenu_1.PublicServiceSettings,
             responseStream: false,
             options: {
                 _unknownFields: {
@@ -2916,7 +2920,7 @@ exports.PublicServiceCatalogDefinition = {
             name: "getPublicServiceSettings",
             requestType: exports.PublicServiceSettingsRequest,
             requestStream: false,
-            responseType: types_1.PublicServiceSettings,
+            responseType: contextMenu_1.PublicServiceSettings,
             responseStream: false,
             options: {},
         },
